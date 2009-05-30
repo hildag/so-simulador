@@ -10,10 +10,15 @@
  */
 package view;
 
+import bean.Proceso;
+import bean.Simulador;
+import control.ControlProceso;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import javax.swing.DefaultDesktopManager;
-import javax.swing.DesktopManager;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -24,6 +29,10 @@ public class MenuAplicacionServidor extends javax.swing.JFrame {
     private DialogoRealizarConfiguracionSimulador dlgConfigurarSimulador;
     private DialogoRealizarConfiguracionUsuario dlgConfigurarUsuario;
     private DialogoAgregarProceso dlgAgregarProceso;
+    private DialogoAgregarProcesoArchivo dlgAgregarProcesoArchivo;
+
+    private ControlProceso controlProceso;
+    private Simulador principal;
 
     /** Creates new form MenuAplicacionServidor */
     public MenuAplicacionServidor() {
@@ -32,9 +41,20 @@ public class MenuAplicacionServidor extends javax.swing.JFrame {
         Dimension tamano = toolkit.getScreenSize();
         this.setPreferredSize(new Dimension(tamano.width, tamano.height - 30));
         initComponents();
+        controlProceso = new ControlProceso();
 
-        DesktopManager a = new DefaultDesktopManager();
+    }
 
+    public ControlProceso getControlProceso() {
+        return controlProceso;
+    }
+
+    public Simulador getSimulador() {
+        return principal;
+    }
+
+    public void setSimulador(Simulador principal) {
+        this.principal = principal;
     }
 
     /** This method is called from within the constructor to
@@ -55,7 +75,8 @@ public class MenuAplicacionServidor extends javax.swing.JFrame {
         jmiConfigurarUsuarios = new javax.swing.JMenuItem();
         jmSimulador = new javax.swing.JMenu();
         jmiAgregarProceso = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jmiAgregarProcesoArchivo = new javax.swing.JMenuItem();
+        jmiVerProcesos = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Simulador de Sistema Operativo");
@@ -73,13 +94,10 @@ public class MenuAplicacionServidor extends javax.swing.JFrame {
 
         tbProceso.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {},
-                {},
-                {},
-                {}
+
             },
             new String [] {
-
+                "id", "Nombre", "Tipo", "Prioridad", "Usuario"
             }
         ));
         jScrollPane1.setViewportView(tbProceso);
@@ -106,7 +124,7 @@ public class MenuAplicacionServidor extends javax.swing.JFrame {
 
         jmSimulador.setText("Simulador");
 
-        jmiAgregarProceso.setText("Agregar Proceso");
+        jmiAgregarProceso.setText("Agregar Proceso Manualmente");
         jmiAgregarProceso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmiAgregarProcesoActionPerformed(evt);
@@ -114,8 +132,21 @@ public class MenuAplicacionServidor extends javax.swing.JFrame {
         });
         jmSimulador.add(jmiAgregarProceso);
 
-        jMenuItem1.setText("Ver Procesos");
-        jmSimulador.add(jMenuItem1);
+        jmiAgregarProcesoArchivo.setText("Agregar Proceso desde un archivo ");
+        jmiAgregarProcesoArchivo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiAgregarProcesoArchivoActionPerformed(evt);
+            }
+        });
+        jmSimulador.add(jmiAgregarProcesoArchivo);
+
+        jmiVerProcesos.setText("Ver Procesos");
+        jmiVerProcesos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiVerProcesosActionPerformed(evt);
+            }
+        });
+        jmSimulador.add(jmiVerProcesos);
 
         jmbBarra.add(jmSimulador);
 
@@ -138,9 +169,9 @@ public class MenuAplicacionServidor extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -150,7 +181,7 @@ public class MenuAplicacionServidor extends javax.swing.JFrame {
 
     private void jmiConfigurarSimuladorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiConfigurarSimuladorActionPerformed
         // TODO add your handling code here:
-        if (dlgConfigurarSimulador != null) {
+        if (dlgConfigurarSimulador == null) {
             dlgConfigurarSimulador = new DialogoRealizarConfiguracionSimulador(this, true);
             dlgConfigurarSimulador.setLocationRelativeTo(this);
         }
@@ -159,7 +190,7 @@ public class MenuAplicacionServidor extends javax.swing.JFrame {
 
     private void jmiConfigurarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiConfigurarUsuariosActionPerformed
         // TODO add your handling code here:
-        if (dlgConfigurarUsuario != null) {
+        if (dlgConfigurarUsuario == null) {
             dlgConfigurarUsuario = new DialogoRealizarConfiguracionUsuario(this, true);
             dlgConfigurarUsuario.setLocationRelativeTo(this);
         }
@@ -168,22 +199,60 @@ public class MenuAplicacionServidor extends javax.swing.JFrame {
 
     private void jmiAgregarProcesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAgregarProcesoActionPerformed
         // TODO add your handling code here:
-
-        dlgAgregarProceso = new DialogoAgregarProceso(this, true);
+        if (dlgAgregarProceso == null) {
+            dlgAgregarProceso = new DialogoAgregarProceso(this, true);
+            dlgAgregarProceso.setLocationRelativeTo(this);
+        }
         dlgAgregarProceso.setVisible(true);
-
 }//GEN-LAST:event_jmiAgregarProcesoActionPerformed
 
+    private void jmiVerProcesosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiVerProcesosActionPerformed
+        // TODO add your handling code here:
+
+        List listaProceso = controlProceso.getListadoProceso();
+        DefaultTableModel tb = (DefaultTableModel) tbProceso.getModel();
+        if(!listaProceso.isEmpty()) {
+
+            for (int i = 0; i < listaProceso.size(); i++) {
+
+            Proceso proceso = (Proceso) listaProceso.get(i);
+            Object[] data = new Object[]{
+                proceso.getId(),
+                proceso.getNombre(),
+                proceso.getTipo(),
+                proceso.getPrioridad(),
+                proceso.getUsuario()
+            };
+            tb.addRow(data);
+
+            }
+            
+        } else {
+            JOptionPane.showMessageDialog(this, "No existen procesos registrados", "Confirmación", JOptionPane.YES_OPTION);
+        }
+        
+}//GEN-LAST:event_jmiVerProcesosActionPerformed
+
+    private void jmiAgregarProcesoArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAgregarProcesoArchivoActionPerformed
+        // TODO add your handling code here:
+        if (dlgAgregarProcesoArchivo == null) {
+            dlgAgregarProcesoArchivo = new DialogoAgregarProcesoArchivo(this, true);
+            dlgAgregarProcesoArchivo.setLocationRelativeTo(this);
+        }
+        dlgAgregarProcesoArchivo.setVisible(true);
+    }//GEN-LAST:event_jmiAgregarProcesoArchivoActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JMenu jmConfigurar;
     private javax.swing.JMenu jmSimulador;
     private javax.swing.JMenuBar jmbBarra;
     private javax.swing.JMenuItem jmiAgregarProceso;
+    private javax.swing.JMenuItem jmiAgregarProcesoArchivo;
     private javax.swing.JMenuItem jmiConfigurarSimulador;
     private javax.swing.JMenuItem jmiConfigurarUsuarios;
+    private javax.swing.JMenuItem jmiVerProcesos;
     private javax.swing.JTable tbProceso;
     // End of variables declaration//GEN-END:variables
 }
