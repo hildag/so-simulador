@@ -11,7 +11,9 @@
 
 package view;
 
+import bean.Proceso;
 import java.util.Date;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,14 +21,15 @@ import java.util.Date;
  */
 public class DialogoAgregarProceso extends javax.swing.JDialog {
 
-    /** Creates new form DialogoAgregarProceso */
-    public DialogoAgregarProceso() {
-        
-    }
+    private MenuAplicacionServidor parent;
 
-    public DialogoAgregarProceso(javax.swing.JFrame parent, boolean modal) {
+    /** Creates new form DialogoAgregarProceso */
+    public DialogoAgregarProceso(MenuAplicacionServidor parent, boolean modal) {
         super(parent, modal);
+        this.parent = parent;
         initComponents();
+
+
     }
 
     /** This method is called from within the constructor to
@@ -38,20 +41,21 @@ public class DialogoAgregarProceso extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jFileChooser1 = new javax.swing.JFileChooser();
         pnlBoton = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnAgregarProceso = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
         pnlRegistrar = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox();
-        jComboBox1 = new javax.swing.JComboBox();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        cmbUsuario = new javax.swing.JComboBox();
+        cmbTipo = new javax.swing.JComboBox();
+        txtNombre = new javax.swing.JTextField();
+        txtId = new javax.swing.JTextField();
+        txtPrioridad = new javax.swing.JTextField();
         chkProgramar = new javax.swing.JCheckBox();
         pnlProgramar = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -63,9 +67,19 @@ public class DialogoAgregarProceso extends javax.swing.JDialog {
         setTitle("Agregar Proceso");
         setMinimumSize(new java.awt.Dimension(290, 330));
 
-        jButton1.setText("Agregar");
+        btnAgregarProceso.setText("Agregar");
+        btnAgregarProceso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarProcesoActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Cancelar");
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout pnlBotonLayout = new javax.swing.GroupLayout(pnlBoton);
         pnlBoton.setLayout(pnlBotonLayout);
@@ -73,9 +87,9 @@ public class DialogoAgregarProceso extends javax.swing.JDialog {
             pnlBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlBotonLayout.createSequentialGroup()
                 .addGap(55, 55, 55)
-                .addComponent(jButton1)
+                .addComponent(btnAgregarProceso)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
+                .addComponent(btnCancelar)
                 .addContainerGap(58, Short.MAX_VALUE))
         );
         pnlBotonLayout.setVerticalGroup(
@@ -83,8 +97,8 @@ public class DialogoAgregarProceso extends javax.swing.JDialog {
             .addGroup(pnlBotonLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlBotonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addComponent(btnCancelar)
+                    .addComponent(btnAgregarProceso))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -100,9 +114,9 @@ public class DialogoAgregarProceso extends javax.swing.JDialog {
 
         jLabel5.setText("Usuario");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Administrador", "Usuario", "Sistema" }));
+        cmbUsuario.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Administrador 1", "Usuario 1 ", "Sistema 1" }));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Muy Alta", "Alta", "Mayor que lo normal", "Normal", "Baja", "Minima" }));
+        cmbTipo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Muy Alta", "Alta", "Mayor que lo normal", "Normal", "Baja", "Minima" }));
 
         chkProgramar.setText("Programar");
         chkProgramar.addActionListener(new java.awt.event.ActionListener() {
@@ -127,11 +141,11 @@ public class DialogoAgregarProceso extends javax.swing.JDialog {
                             .addComponent(jLabel5))
                         .addGap(30, 30, 30)
                         .addGroup(pnlRegistrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
-                            .addComponent(jComboBox1, 0, 138, Short.MAX_VALUE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtNombre, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                            .addComponent(txtPrioridad, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                            .addComponent(cmbTipo, 0, 139, Short.MAX_VALUE)
+                            .addComponent(txtId, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                            .addComponent(cmbUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(49, 49, 49))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlRegistrarLayout.createSequentialGroup()
                         .addComponent(chkProgramar)
@@ -143,29 +157,25 @@ public class DialogoAgregarProceso extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(pnlRegistrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlRegistrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlRegistrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cmbTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlRegistrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(pnlRegistrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(pnlRegistrarLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(pnlRegistrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(38, Short.MAX_VALUE))
-                    .addGroup(pnlRegistrarLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(chkProgramar))))
+                    .addComponent(txtPrioridad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlRegistrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(cmbUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addComponent(chkProgramar))
         );
 
         pnlProgramar.setEnabled(false);
@@ -215,12 +225,12 @@ public class DialogoAgregarProceso extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(pnlRegistrar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(pnlProgramar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pnlBoton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(pnlRegistrar, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE)
+                    .addComponent(pnlBoton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pnlProgramar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -228,9 +238,9 @@ public class DialogoAgregarProceso extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(pnlRegistrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(pnlProgramar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(pnlProgramar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(pnlBoton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -251,23 +261,39 @@ public class DialogoAgregarProceso extends javax.swing.JDialog {
 
 }//GEN-LAST:event_chkProgramarActionPerformed
 
-    /**
-    * @param args the command line arguments
-    */
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new DialogoAgregarProceso().setVisible(true);
-            }
-        });
-    }
+    private void btnAgregarProcesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarProcesoActionPerformed
+        // TODO add your handling code here:
+        String id = txtId.getText().trim();
+        String nombre = txtNombre.getText().trim();
+        String tipo = String.valueOf(cmbTipo.getSelectedItem());
+        byte prioridad = Byte.valueOf(txtPrioridad.getText().trim());
+        String usuario = String.valueOf(cmbUsuario.getSelectedItem());
+
+        Proceso proceso = new Proceso();
+        proceso.setId(id);
+        proceso.setNombre(nombre);
+        proceso.setTipo(tipo);
+        proceso.setPrioridad(prioridad);
+        proceso.setUsuario(usuario);
+
+        parent.getControlProceso().agregarProceso(proceso);
+
+        JOptionPane.showMessageDialog(this, "El proceso ha sido agregado", "Confirmación", JOptionPane.YES_OPTION);
+
+
+}//GEN-LAST:event_btnAgregarProcesoActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAgregarProceso;
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JCheckBox chkProgramar;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
+    private javax.swing.JComboBox cmbTipo;
+    private javax.swing.JComboBox cmbUsuario;
+    private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -275,14 +301,14 @@ public class DialogoAgregarProceso extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JPanel pnlBoton;
     private javax.swing.JPanel pnlProgramar;
     private javax.swing.JPanel pnlRegistrar;
     private javax.swing.JFormattedTextField txtFechaProgramado;
     private javax.swing.JFormattedTextField txtHoraProgramado;
+    private javax.swing.JTextField txtId;
+    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtPrioridad;
     // End of variables declaration//GEN-END:variables
 
 }

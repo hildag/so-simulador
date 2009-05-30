@@ -11,19 +11,23 @@
 
 package view;
 
+import bean.Simulador;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author zAxA
  */
 public class DialogoRealizarConfiguracionSimulador extends javax.swing.JDialog {
 
+    private MenuAplicacionServidor parent;
+
     /** Creates new form DialogoRealizarConfiguracion */
-    public DialogoRealizarConfiguracionSimulador(javax.swing.JFrame parent, boolean modal) {
+    public DialogoRealizarConfiguracionSimulador(MenuAplicacionServidor parent, boolean modal) {
         super(parent, modal);
+        this.parent = parent;
         initComponents();
     }
-
-
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -38,17 +42,19 @@ public class DialogoRealizarConfiguracionSimulador extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
+        txtSobrecarga = new javax.swing.JTextField();
+        txtMaximaCantidadProceso = new javax.swing.JTextField();
+        txtQuantum = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
+        txtMaximaCantidadCaracteres = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jTextField10 = new javax.swing.JTextField();
+        txtCaracteresEspeciales = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnAgregar = new javax.swing.JButton();
+        btnAceptar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Configurar Máquina Virtual");
@@ -73,11 +79,11 @@ public class DialogoRealizarConfiguracionSimulador extends javax.swing.JDialog {
         jLabel8.setMinimumSize(new java.awt.Dimension(110, 20));
         jLabel8.setPreferredSize(new java.awt.Dimension(173, 20));
 
-        jTextField6.setPreferredSize(new java.awt.Dimension(30, 20));
+        txtSobrecarga.setPreferredSize(new java.awt.Dimension(30, 20));
 
-        jTextField7.setPreferredSize(new java.awt.Dimension(30, 20));
+        txtMaximaCantidadProceso.setPreferredSize(new java.awt.Dimension(30, 20));
 
-        jTextField8.setPreferredSize(new java.awt.Dimension(30, 20));
+        txtQuantum.setPreferredSize(new java.awt.Dimension(30, 20));
 
         jLabel9.setFont(new java.awt.Font("Trebuchet MS", 0, 11));
         jLabel9.setText("Máxima cantidad de caracteres");
@@ -85,14 +91,14 @@ public class DialogoRealizarConfiguracionSimulador extends javax.swing.JDialog {
         jLabel9.setMinimumSize(new java.awt.Dimension(110, 20));
         jLabel9.setPreferredSize(new java.awt.Dimension(173, 20));
 
-        jTextField9.setPreferredSize(new java.awt.Dimension(30, 20));
+        txtMaximaCantidadCaracteres.setPreferredSize(new java.awt.Dimension(30, 20));
 
         jLabel10.setFont(new java.awt.Font("Trebuchet MS", 0, 11));
         jLabel10.setText("Caracteres especiales");
         jLabel10.setMaximumSize(new java.awt.Dimension(105, 20));
         jLabel10.setMinimumSize(new java.awt.Dimension(105, 20));
 
-        jTextField10.setPreferredSize(new java.awt.Dimension(207, 20));
+        txtCaracteresEspeciales.setPreferredSize(new java.awt.Dimension(207, 20));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -109,7 +115,26 @@ public class DialogoRealizarConfiguracionSimulador extends javax.swing.JDialog {
 
         jLabel1.setText("Procesos: Tipos y Prioridades");
 
-        jButton1.setText("Agregar");
+        btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
+
+        btnAceptar.setText("Aceptar");
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarActionPerformed(evt);
+            }
+        });
+
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -127,14 +152,23 @@ public class DialogoRealizarConfiguracionSimulador extends javax.swing.JDialog {
                             .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtSobrecarga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMaximaCantidadProceso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtQuantum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMaximaCantidadCaracteres, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                    .addComponent(jTextField10, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                    .addComponent(jLabel1)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(txtCaracteresEspeciales, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnAceptar)
+                            .addComponent(jLabel1))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 89, Short.MAX_VALUE)
+                                .addComponent(btnAgregar))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnCancelar)))))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -142,28 +176,32 @@ public class DialogoRealizarConfiguracionSimulador extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtQuantum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMaximaCantidadProceso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtSobrecarga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMaximaCantidadCaracteres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31)
-                .addComponent(jLabel1)
-                .addGap(13, 13, 13)
-                .addComponent(jButton1)
+                .addComponent(txtCaracteresEspeciales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAceptar)
+                    .addComponent(btnCancelar))
+                .addGap(29, 29, 29)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAgregar)
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -189,8 +227,42 @@ public class DialogoRealizarConfiguracionSimulador extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+        // TODO add your handling code here:
+
+        byte quantum = Byte.valueOf(txtQuantum.getText());
+        short cantidadProcesos = Short.valueOf(txtMaximaCantidadProceso.getText().trim());
+        byte sobrecarga = Byte.valueOf(txtSobrecarga.getText());
+        byte maximaCantidadCaracteres = Byte.valueOf(txtMaximaCantidadCaracteres.getText());
+        String caracteresEspeciales = txtCaracteresEspeciales.getText().trim();
+
+        Simulador simulador = parent.getSimulador();
+        if (simulador == null) {
+            simulador = new Simulador();
+        }
+
+        simulador.setQuantum(quantum);
+        simulador.setCantidadProcesos(cantidadProcesos);
+        simulador.setMaximaCantidadCaracteres(maximaCantidadCaracteres);
+        simulador.setCaracteresEspeciales(caracteresEspeciales);
+        simulador.setSobrecarga(sobrecarga);
+        
+        JOptionPane.showMessageDialog(this, "Datos Guardados", "Confirmación", JOptionPane.YES_OPTION);
+
+    }//GEN-LAST:event_btnAceptarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAgregarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnAceptar;
+    private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel6;
@@ -200,11 +272,11 @@ public class DialogoRealizarConfiguracionSimulador extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JTextField txtCaracteresEspeciales;
+    private javax.swing.JTextField txtMaximaCantidadCaracteres;
+    private javax.swing.JTextField txtMaximaCantidadProceso;
+    private javax.swing.JTextField txtQuantum;
+    private javax.swing.JTextField txtSobrecarga;
     // End of variables declaration//GEN-END:variables
 
 }

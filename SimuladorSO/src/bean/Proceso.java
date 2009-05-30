@@ -22,6 +22,12 @@ public class Proceso {
     private boolean esProgramado;
     private Date fechaProgramacion;
 
+    private String estado;
+
+
+    public Proceso() {
+    }
+  
     /**
      * @return the id
      */
