@@ -14,13 +14,16 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import javax.swing.DefaultDesktopManager;
 import javax.swing.DesktopManager;
-import javax.swing.JInternalFrame;
 
 /**
  *
  * @author zAxA
  */
 public class MenuAplicacionServidor extends javax.swing.JFrame {
+
+    private DialogoRealizarConfiguracionSimulador dlgConfigurarSimulador;
+    private DialogoRealizarConfiguracionUsuario dlgConfigurarUsuario;
+    private DialogoAgregarProceso dlgAgregarProceso;
 
     /** Creates new form MenuAplicacionServidor */
     public MenuAplicacionServidor() {
@@ -43,185 +46,144 @@ public class MenuAplicacionServidor extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDesktopPane1 = new javax.swing.JDesktopPane();
-        jiTest = new javax.swing.JInternalFrame();
-        jInternalFrame1 = new javax.swing.JInternalFrame();
-        jInternalFrame2 = new javax.swing.JInternalFrame();
-        jInternalFrame3 = new javax.swing.JInternalFrame();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbProceso = new javax.swing.JTable();
+        jmbBarra = new javax.swing.JMenuBar();
+        jmConfigurar = new javax.swing.JMenu();
+        jmiConfigurarSimulador = new javax.swing.JMenuItem();
+        jmiConfigurarUsuarios = new javax.swing.JMenuItem();
+        jmSimulador = new javax.swing.JMenu();
+        jmiAgregarProceso = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Simulador de Sistema Operativo");
 
-        jDesktopPane1.setAutoscrolls(true);
-        jDesktopPane1.setDesktopManager(null);
-        jDesktopPane1.setDragMode(javax.swing.JDesktopPane.OUTLINE_DRAG_MODE);
-        jDesktopPane1.setSelectedFrame(jiTest);
-
-        jiTest.setClosable(true);
-        jiTest.setIconifiable(true);
-        jiTest.setMaximizable(true);
-        jiTest.setResizable(true);
-        jiTest.setTitle("Ingreso de Datos Test");
-        jiTest.setAutoscrolls(true);
-        jiTest.setVisible(true);
-
-        javax.swing.GroupLayout jiTestLayout = new javax.swing.GroupLayout(jiTest.getContentPane());
-        jiTest.getContentPane().setLayout(jiTestLayout);
-        jiTestLayout.setHorizontalGroup(
-            jiTestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 324, Short.MAX_VALUE)
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 78, Short.MAX_VALUE)
         );
-        jiTestLayout.setVerticalGroup(
-            jiTestLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 214, Short.MAX_VALUE)
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 112, Short.MAX_VALUE)
         );
 
-        jiTest.setBounds(30, 20, 330, 240);
-        jDesktopPane1.add(jiTest, javax.swing.JLayeredPane.MODAL_LAYER);
+        tbProceso.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
 
-        jInternalFrame1.setVisible(true);
+            }
+        ));
+        jScrollPane1.setViewportView(tbProceso);
 
-        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
-        jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
-        jInternalFrame1Layout.setHorizontalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 74, Short.MAX_VALUE)
-        );
-        jInternalFrame1Layout.setVerticalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 54, Short.MAX_VALUE)
-        );
+        jmConfigurar.setText("Configuración");
 
-        jInternalFrame1.setBounds(420, 20, 80, 80);
-        jDesktopPane1.add(jInternalFrame1, javax.swing.JLayeredPane.PALETTE_LAYER);
-
-        jInternalFrame2.setVisible(true);
-
-        javax.swing.GroupLayout jInternalFrame2Layout = new javax.swing.GroupLayout(jInternalFrame2.getContentPane());
-        jInternalFrame2.getContentPane().setLayout(jInternalFrame2Layout);
-        jInternalFrame2Layout.setHorizontalGroup(
-            jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 74, Short.MAX_VALUE)
-        );
-        jInternalFrame2Layout.setVerticalGroup(
-            jInternalFrame2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 34, Short.MAX_VALUE)
-        );
-
-        jInternalFrame2.setBounds(420, 110, 80, 60);
-        jDesktopPane1.add(jInternalFrame2, javax.swing.JLayeredPane.POPUP_LAYER);
-
-        jInternalFrame3.setVisible(true);
-
-        javax.swing.GroupLayout jInternalFrame3Layout = new javax.swing.GroupLayout(jInternalFrame3.getContentPane());
-        jInternalFrame3.getContentPane().setLayout(jInternalFrame3Layout);
-        jInternalFrame3Layout.setHorizontalGroup(
-            jInternalFrame3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 74, Short.MAX_VALUE)
-        );
-        jInternalFrame3Layout.setVerticalGroup(
-            jInternalFrame3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 54, Short.MAX_VALUE)
-        );
-
-        jInternalFrame3.setBounds(420, 190, 80, 80);
-        jDesktopPane1.add(jInternalFrame3, javax.swing.JLayeredPane.DRAG_LAYER);
-
-        jMenu1.setText("File");
-
-        jMenuItem1.setText("Configurar Simulador");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jmiConfigurarSimulador.setText("Configurar Simulador");
+        jmiConfigurarSimulador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jmiConfigurarSimuladorActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
+        jmConfigurar.add(jmiConfigurarSimulador);
 
-        jMenuItem4.setText("Configurar Usuarios");
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+        jmiConfigurarUsuarios.setText("Configurar Usuarios");
+        jmiConfigurarUsuarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem4ActionPerformed(evt);
+                jmiConfigurarUsuariosActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem4);
+        jmConfigurar.add(jmiConfigurarUsuarios);
 
-        jMenuBar1.add(jMenu1);
+        jmbBarra.add(jmConfigurar);
 
-        jMenu2.setText("Edit");
+        jmSimulador.setText("Simulador");
 
-        jMenuItem2.setText("Agregar Proceso");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        jmiAgregarProceso.setText("Agregar Proceso");
+        jmiAgregarProceso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                jmiAgregarProcesoActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem2);
+        jmSimulador.add(jmiAgregarProceso);
 
-        jMenuItem3.setText("jMenuItem3");
-        jMenu2.add(jMenuItem3);
+        jMenuItem1.setText("Ver Procesos");
+        jmSimulador.add(jMenuItem1);
 
-        jMenuBar1.add(jMenu2);
+        jmbBarra.add(jmSimulador);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(jmbBarra);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 536, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(468, 468, 468)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 536, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jDesktopPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void jmiConfigurarSimuladorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiConfigurarSimuladorActionPerformed
         // TODO add your handling code here:
-
-        DialogoRealizarConfiguracionSimulador dlgConfigurarSimulador = new DialogoRealizarConfiguracionSimulador(this, true);
+        if (dlgConfigurarSimulador != null) {
+            dlgConfigurarSimulador = new DialogoRealizarConfiguracionSimulador(this, true);
+            dlgConfigurarSimulador.setLocationRelativeTo(this);
+        }
         dlgConfigurarSimulador.setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+}//GEN-LAST:event_jmiConfigurarSimuladorActionPerformed
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+    private void jmiConfigurarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiConfigurarUsuariosActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem4ActionPerformed
+        if (dlgConfigurarUsuario != null) {
+            dlgConfigurarUsuario = new DialogoRealizarConfiguracionUsuario(this, true);
+            dlgConfigurarUsuario.setLocationRelativeTo(this);
+        }
+        dlgConfigurarUsuario.setVisible(true);
+}//GEN-LAST:event_jmiConfigurarUsuariosActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void jmiAgregarProcesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAgregarProcesoActionPerformed
         // TODO add your handling code here:
 
-        DialogoAgregarProceso dlgConfigurarSimulador = new DialogoAgregarProceso(this, true);
-        dlgConfigurarSimulador.setVisible(true);
+        dlgAgregarProceso = new DialogoAgregarProceso(this, true);
+        dlgAgregarProceso.setVisible(true);
 
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+}//GEN-LAST:event_jmiAgregarProcesoActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JInternalFrame jInternalFrame1;
-    private javax.swing.JInternalFrame jInternalFrame2;
-    private javax.swing.JInternalFrame jInternalFrame3;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JInternalFrame jiTest;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JMenu jmConfigurar;
+    private javax.swing.JMenu jmSimulador;
+    private javax.swing.JMenuBar jmbBarra;
+    private javax.swing.JMenuItem jmiAgregarProceso;
+    private javax.swing.JMenuItem jmiConfigurarSimulador;
+    private javax.swing.JMenuItem jmiConfigurarUsuarios;
+    private javax.swing.JTable tbProceso;
     // End of variables declaration//GEN-END:variables
 }
