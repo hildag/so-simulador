@@ -1,0 +1,1 @@
+Pretende simular el funcionamiento de un sistema operativo
